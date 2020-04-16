@@ -1,0 +1,30 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+    <div class="formbox">
+			<div class="title">自动发货</div>
+            <form action="/delivery/order" method='POST'>
+			<div class="log">
+				<div class="line" style="padding-top: 29px;">
+					<input type="text" class="text" placeholder="二级订单号" name="orderId" id="order" value="{{ orderId }}" tabindex="1">
+				</div>
+				<div class="line" style="padding-top: 10px;">
+					<input type="text"  placeholder="验证码不区分大小写" id="deliver" name="randCode" class="singletext" value="{{ randCode }}" tabindex="2">
+                    <input style="display: none;" name="cookie" value="{{ cookie }}">
+                    <img id="imgcode" name="code" style="cursor:pointer;" src="{{ url_for('static', filename='verif_code.jpeg') }}" >
+				</div>
+				<div class="line" style="display: none;" id="dynamicPassPlace">
+
+				</div>
+				<div class="btn-line">
+					<input type="submit" class="submit" name="btnLogin" id="btnLogin" tabindex="4" value="发货">
+					<span class="check" id="error"></span>
+				</div>
+				<div class="tip"></div>
+			</div>
+            </form>
+	</div>
+
+{% endblock %}
+
+
