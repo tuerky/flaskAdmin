@@ -3,46 +3,56 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>饷团质量平台</title>
+	<title>质量平台</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 
 <body>
 	<div class="lowin">
 		<div class="lowin-brand">
-			<img src="{{ url_for('static', filename='kodinger.jpg') }}" alt="logo">
+			<img src="{{ url_for('static', filename='logo.jpeg') }}" alt="logo">
 		</div>
 		<div class="lowin-wrapper">
 			<div class="lowin-box lowin-login">
 				<div class="lowin-box-inner">
-					<form>
+					<!--<form id="form-group" action="/login" method='POST'>-->
+                      <!--<div class="lowin-group-fork">-->
 						<p>请登录</p>
 						<div class="lowin-group">
 							<label>用户 <a href="#" class="login-back-link">登录?</a></label>
-							<input type="text" autocomplete="name" name="name" class="lowin-input" value="{{ name }}">
+							<input type="text" autocomplete="name" name="name" class="lowin-input">
 						</div>
+
+                        <p class="forgot-error" name="forget_message" style="color: #ff6464; display: none"></p>
+
 						<div class="lowin-group password-group">
 							<label>密码 <a href="#" class="forgot-link">忘记密码?</a></label>
-							<input type="password" name="password" autocomplete="current-password" class="lowin-input" value="{{ password }}">
+							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
 						</div>
-						<button class="lowin-btn login-btn">
+
+                        <p class="login-error" name="message" style="color: #ff6464; display: none"></p>
+
+						<button id="login-btn" class="lowin-btn login-btn">
 							点击登录
 						</button>
 
 						<div class="text-foot">
 							还没有账号？ <a href="" class="register-link">注册</a>
 						</div>
-					</form>
+                      <!--</div>-->
+					<!--</form>-->
 				</div>
 			</div>
 
 			<div class="lowin-box lowin-register">
 				<div class="lowin-box-inner">
-					<form>
+					<!-- <form> -->
 						<p>让我们来创建账户吧！</p>
 						<div class="lowin-group">
 							<label>用户名</label>
-							<input type="text" name="name" autocomplete="name" class="lowin-input">
+							<input type="text" name="register_name" autocomplete="name" class="lowin-input">
 						</div>
 						<div class="lowin-group">
 							<label>邮箱</label>
@@ -50,31 +60,124 @@
 						</div>
 						<div class="lowin-group">
 							<label>密码</label>
-							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
+							<input type="password" name="register_password" autocomplete="current-password" class="lowin-input">
 						</div>
-						<button class="lowin-btn">
+                        <p class="register-error" name="register_message" style="color: #ff6464; display: none"></p>
+
+						<button class="lowin-btn" id="btn">
 							注册
 						</button>
 
 						<div class="text-foot">
 							已有账户？ <a href="" class="login-link">登录</a>
 						</div>
-					</form>
+					<!--</form>-->
 				</div>
 			</div>
 		</div>
 	
 		<footer class="lowin-footer">
-			饷团质量测试平台（爱库存） <a href="http://msbackend.akctest1.com/" target="_blank" title="饷团">饷团</a>
+			质量测试平台 <a href="http://www.baidu.com/" target="_blank" title="baidu">baidu</a>
 		</footer>
 	</div>
 
 	<script src="{{ url_for('static', filename='auth.js') }}"></script>
 	<script>
 		Auth.init({
-			login_url: '#login',
-			forgot_url: '#forgot'
+			login_url: '/login',
+			forgot_url: '/forgot'
 		});
 	</script>
+    <script>
+        function Timer(model){
+            let lowin_error = document.getElementsByClassName(model);
+            let timer = setInterval(() =>{
+                 if (lowin_error[0].style.display === "block"){
+                     setTimeout(() =>{
+                         lowin_error[0].style.display = "none";
+                     }, 1500);
+                     clearInterval(timer);
+                 }
+            }, 1500);
+        }
+
+
+    </script>
+    <script>
+        $(function() {
+            $("#btn").click(function () {
+                let code = 0;
+                let message = '';
+                $.ajax({
+                    url: "/register",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "name": $('input[name="register_name"]').val(),
+                        "email": $('input[name="email"]').val(),
+                        "password": $('input[name="register_password"]').val()
+                    },
+                    success: function(data){
+                        console.log(data);
+                        code = data.msg_code;
+                        message = data.message;
+                        $(".register-error").css({"display": "block"}).text(message);
+                        Timer("register-error");
+
+                    }
+                })
+            })
+        })
+
+    </script>
+    <script>
+        $(function(){
+                $('#login-btn').click(function () {
+                    let code = 0;
+                    let message = '';
+                    if("忘记密码" === $("#login-btn").text()) {
+                        $.ajax({
+                            url: "/forgot",
+                            type: "POST",
+                            dataType: "json",
+                            data: {
+                                "name": $('input[name="name"]').val()
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                code = data.msg_code;
+                                message = data.message;
+                                $(".forgot-error").css({"display": "block"}).text(message);
+                                Timer("forgot-error");
+                            }
+
+                        })
+                    }else {
+                        $.ajax({
+                        url: "/login",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "name": $('input[name="name"]').val(),
+                            "password": $('input[name="password"]').val()
+                        },
+                        success: function (data) {
+                            //console.log(data);
+                            code = data.msg_code;
+                            message = data.message;
+                            if(code === 200){
+                                window.location.href = "/index/"
+                            }else{
+                                $(".login-error").css({"display": "block"}).text(message);
+                                Timer("login-error");
+                            }
+
+                        }
+                      })
+                    }
+                })
+        })
+    </script>
+
 </body>
 </html>

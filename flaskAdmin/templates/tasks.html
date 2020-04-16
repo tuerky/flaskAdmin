@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block div %}
+    <h1>
+						配置工具
+					</h1>
+					<ul class="tasks zebra-list"  >
+                        <li style="width: 100%">
+                            <span style="font-size: small; color: #08c">
+                                xxxxxx
+                            </span>
+                            <input id="prod" type="checkbox" class="env"><em style="font-size: xx-small; color: #999">生产</em>
+                            <input id="test" type="checkbox" class="env" checked="checked"><em style="font-size: xx-small; color: #999">测试</em>
+                            <input id="chosen" type="checkbox" style="float: right"> <span class="meta" style="float: right"><em>全选 *</em></span>
+                        </li>
+						<li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 全部</span> <input type="text" style="float: right" class="text" id="tagNo1" placeholder="展示分类名称" name="all" value="全部"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 品牌专场</span> <input type="text" style="float: right" class="text" id="tagNo2" placeholder="展示分类名称" value/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 爆款</span> <input type="text" style="float: right" class="text" id="tagNo3" placeholder="展示分类名称" value="爆款"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 预告</span> <input type="text" style="float: right" class="text" id="tagNo4" placeholder="展示分类名称" value="预告"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 自营</span> <input type="text" style="float: right" class="text" id="tagNo5" placeholder="展示分类名称" value="严选"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 时尚女装</span> <input type="text" style="float: right" class="text" id="tagNo6" placeholder="展示分类名称" value="女装"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 品质男装</span> <input type="text" style="float: right" class="text" id="tagNo7" placeholder="展示分类名称" value="男装"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 童装母婴</span> <input type="text" style="float: right" class="text" id="tagNo8" placeholder="展示分类名称" value="童装母婴"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 跨境商品</span> <input type="text" style="float: right" class="text" id="tagNo9" placeholder="展示分类名称" value="海淘"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 内衣保暖</span> <input type="text" style="float: right" class="text" id="tagNo10" placeholder="展示分类名称" value="内衣"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 美妆个护</span> <input type="text" style="float: right" class="text" id="tagNo11" placeholder="展示分类名称" value="美妆"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 潮流鞋靴</span> <input type="text" style="float: right" class="text" id="tagNo12" placeholder="展示分类名称" value="鞋靴"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 箱包皮具</span> <input type="text" style="float: right" class="text" id="tagNo13" placeholder="展示分类名称" value="箱包"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 休闲运动</span> <input type="text" style="float: right" class="text" id="tagNo14" placeholder="展示分类名称" value="运动"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 家居家纺</span> <input type="text" style="float: right" class="text" id="tagNo15" placeholder="展示分类名称" value="家居"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 流行饰品</span> <input type="text" style="float: right" class="text" id="tagNo16" placeholder="展示分类名称" value="配饰"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 数码家电</span> <input type="text" style="float: right" class="text" id="tagNo17" placeholder="展示分类名称" value="数码家电"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 美味食品</span> <input type="text" style="float: right" class="text" id="tagNo18" placeholder="展示分类名称" value="美味食品"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 图书卡券</span> <input type="text" style="float: right" class="text" id="tagNo19" placeholder="展示分类名称" value="图书卡券"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li >
+                            <input type="checkbox" /><span class="title" style="float: inside"> 天天抢购</span> <input type="text" style="float: right" class="text" id="tagNo20" placeholder="展示分类名称" value="天天抢购"/> <span class="meta">默认 <em>分类名</em></span>
+						</li>
+                        <li style="width: 100%">
+                            <button id="tagPush" type="submit" class="btn btn-primary" style="float: right; font-size: x-small">执行</button>
+                        </li>
+                    </ul>
+                    {% import 'pages.html' as page %}
+                    {{ page.check_page(args, url_list) }}
+
+
+					<!--<a class="toggle-link" href="#new-task"><i class="icon-plus"></i> New Task</a>
+					<form id="new-task" class="form-horizontal hidden">
+						<fieldset>
+							<legend>New Task</legend>
+							<div class="control-group">
+								<label class="control-label" for="textarea">Task Details</label>
+								<div class="controls">
+									<textarea class="input-xlarge" id="textarea" rows="2"></textarea>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Create</button> <button class="btn">Cancel</button>
+							</div>
+						</fieldset>
+					</form>
+					<h2>
+						Completed Tasks
+					</h2>
+					<ul class="tasks done">
+						<li>
+							<i class="icon-ok"></i> <span class="title">Wash the Car</span> <span class="meta">Completed <em>2 days ago</em> by <em>John</em></span>
+						</li>
+						<li>
+							<i class="icon-ok"></i> <span class="title">Call the plumber</span> <span class="meta">Completed <em>5 days ago</em> by <em>John</em></span>
+						</li>
+						<li>
+							<i class="icon-ok"></i> <span class="title">Try that new cookie recipe</span> <span class="meta">Completed <em>2 weeks ago</em> by <em>Jill</em></span>
+						</li>
+					</ul>-->
+
+{% endblock %}

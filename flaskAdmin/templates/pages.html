@@ -1,0 +1,98 @@
+{% macro check_page(page, url_list) %}
+<div class="pagination">
+    <ul class="check-page">
+
+        {% for page_index in range(url_list|length + 2) %}
+
+        {% if page_index == 0 and page == 1 %}
+            <li class="disabled">
+                <a href="#">&laquo;</a>
+            </li>
+        {% elif page_index == 0 and page != 1 %}
+            <li>
+                <a href="#">&laquo;</a>
+            </li>
+        {% elif page_index == url_list|length + 1 and page == url_list|length %}
+             <li class="disabled">
+                <a href="#">&raquo;</a>
+             </li>
+        {% elif page_index == url_list|length + 1 and page != url_list|length %}
+             <li>
+                <a href="#">&raquo;</a>
+             </li>
+        {% else %}
+            {% if page_index == page %}
+                <li class="active">
+                    <a href="/{{ url_list[page_index - 1] }}">{{ page_index }}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="/{{ url_list[page_index - 1] }}">{{ page_index }}</a>
+                </li>
+            {% endif %}
+
+        {% endif %}
+        {% endfor %}
+
+
+    </ul>
+</div>
+ <script>
+     $('a[href="#"]').click(function (){
+
+                 /*if ($(this).text() !== '«' && $(this).text() !== '»'){
+                     $('a').parent().removeAttr('class');
+                     $(this).parent().addClass('active');
+                     //$(this)[0].click();
+
+                     if ($(this).text() === '1'){
+                         $('a:contains("«")').parent().addClass('disabled');
+                         //console.log('gg');
+                     }
+                     if ($(this).parent().next().find('a').text() === '»'){
+                         $('a:contains("»")').parent().addClass('disabled');
+                     }
+
+
+                 }else if($(this).text() === '«'){
+                     if ($('.active').find('a[href="#"]').text() !== '1'){
+                         let prev = parseInt($('.active').find('a[href="#"]').text()) - 1;
+                         //console.log(prev);
+                         $('a[href="#"]').parent().removeAttr('class');
+                         $('a:contains('+prev+')').parent().addClass('active');
+                         if ($('.active').find('a[href="#"]').text() === '1'){
+                             $('a:contains("«")').parent().addClass('disabled');
+                         }
+                         //$('a:contains('+prev+')')[0].click();
+                         }
+
+                 }else{
+                     if ($('.active').next().find('a[href="#"]').text() !== '»'){
+                         let last = parseInt($('.active').find('a[href="#"]').text()) + 1;
+                         $('a[href="#"]').parent().removeAttr('class');
+                         $('a:contains('+last+')').parent().addClass('active');
+
+                         if ($('.active').next().find('a[href="#"]').text() === '»'){
+                             $('a:contains("»")').parent().addClass('disabled');
+                         }
+                         //$('a:contains('+last+')')[0].click();
+
+                     }
+
+                 }*/
+                 //let url_arr = {{ url_list }};
+                 if ($(this).text() === '«'){
+                     if ($('.check-page li.active').find('a').text() !== '1') {
+                         let prev = parseInt($('.check-page li.active').find('a').text()) - 1;
+                         $('.check-page li').find('a:contains('+prev+')')[0].click();
+                     }
+                 }else {
+                     if ($('.check-page li.active').next().find('a[href="#"]').text() !== '»'){
+                         let last = parseInt($('.check-page li.active').find('a').text()) + 1;
+                         $('.check-page li').find('a:contains('+last+')')[0].click();
+                     }
+                 }
+             })
+    </script>
+
+{% endmacro %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block div %}
+<h1>
+    编辑个人信息
+</h1>
+<form id="edit-profile" class="form-horizontal" action="/saveProfile" method="POST">
+    <fieldset>
+        <legend>用户信息</legend>
+        <div class="control-group">
+            <label class="control-label" for="input01">用户名</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" name="name" value="{{ name }}" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input01">手机号</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" name="phone" value="{{ phone }}" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input01">Email</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="input01" name="email" value="{{ email }}" />
+            </div>
+        </div>
+        <div class="control-group" style="display: none">
+            <label class="control-label" for="fileInput">Photo</label>
+            <div class="controls">
+                <input class="input-file" id="fileInput" type="file" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="textarea">描述</label>
+            <div class="controls">
+                <textarea class="input-xlarge" id="textarea" name="description" rows="4">{{ description }}</textarea>
+            </div>
+        </div>
+        <div class="control-group" style="display: none">
+            <label class="control-label" for="optionsCheckbox">Public Profile</label>
+            <div class="controls">
+                <input type="checkbox" id="optionsCheckbox" value="option1" checked="checked" />
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存</button> <button class="btn" style="display: none;">取消</button>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

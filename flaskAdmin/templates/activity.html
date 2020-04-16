@@ -1,0 +1,322 @@
+{% extends 'base.html' %}
+{% block div %}
+
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 70px">
+                工具
+            </th>
+            <th style="width: 210px">
+                订单号
+            </th>
+            <th style="width: 80px;">
+                验证码图片
+            </th>
+            <th style="width: 200px;">
+                输入
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                截单发货
+            </td>
+            <td>
+                <input type="text" class="text" placeholder="二级订单号（必填）" name="orderId" id="order" value="{{ orderId }}">
+            </td>
+            <td>
+                <input style="display: none;" name="cookie" value="{{ cookie }}">
+                <img id="imgCode" name="code" style="cursor:pointer;" src="{{ url_for('static', filename='verif_code.jpeg') }}" ><a id="imgChange" style="font-size: xx-small;">
+                眼瞎，换一张 </a>
+            </td>
+            <td>
+                <input type="text"  placeholder="验证码不区分大小写" id="deliver" name="randCode" class="singletext" value="{{ randCode }}">
+            </td>
+            <td>
+                <button id="delivery_btn" class="btn btn-primary btn-small">发货</button>
+                <div id="fountainTextG" style="display: none">
+                    <div id="fountainTextG_1" class="fountainTextG">L</div>
+                    <div id="fountainTextG_2" class="fountainTextG">o</div>
+                    <div id="fountainTextG_3" class="fountainTextG">a</div>
+                    <div id="fountainTextG_4" class="fountainTextG">d</div>
+                    <div id="fountainTextG_5" class="fountainTextG">i</div>
+                    <div id="fountainTextG_6" class="fountainTextG">n</div>
+                    <div id="fountainTextG_7" class="fountainTextG">g</div>
+                </div>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 70px">
+                工具
+            </th>
+            <th style="width: 210px">
+                服务单号
+            </th>
+            <th style="width: 120px">
+                售后类型
+            </th>
+            <th style="width: 100px">
+                平台/商家
+            </th>
+            <th>
+                流程化
+            </th>
+            <th style="width: 100px">
+                执行
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>
+                售后流程
+            </td>
+            <td>
+                <label for="serviceId">
+                    <input type="text" class="text" placeholder="售后服务单号（必填）" name="serviceId" id="serviceId" value="{{ serviceId }}">
+                </label>
+            </td>
+            <td>
+                <label class="service_checkbox">
+                    <input type="checkbox" id="serviceCheckboxList1" value="option1" checked="checked" />
+                     漏发退款
+                </label>
+                <label class="service_checkbox">
+                    <input type="checkbox" id="serviceCheckboxList2" value="option2" />
+                     退货退款
+                </label>
+            </td>
+            <td>
+                <label class="plat_checkbox">
+                    <input type="checkbox" id="platformCheckboxList1" value="option1" checked="checked" />
+                    平台
+                </label>
+                <label class="plat_checkbox">
+                    <input type="checkbox" id="platformCheckboxList2" value="option2">
+                    商家
+                </label>
+            </td>
+            <td>
+                <label>
+                <select id="select">
+                    <option name="option" id="option0" value="plat_first_pass_main" >平台漏发退款一审通过</option>
+                    <option name="option" id="option1" value="plat_first_reject_main" >平台漏发退款一审拒绝</option>
+                    <!--<option name="option" id="option2" value="mer_first_pass_main" >商家漏发退款一审通过</option>
+                    <option name="option" id="option3" value="mer_first_reject_main" >商家漏发退款一审拒绝</option>
+                    <option name="option" id="option4" value="mer_first_reject_main" >退货退款一审通过等待快件退货</option>
+                    <option name="option" id="option5" value="agent_return_first_pass_main" >退货退款一审拒绝</option>
+                    <option name="option" id="option6" value="mer_warehouse_pass_main" >商家仓库收货审核通过</option>
+                    <option name="option" id="option7" value="mer_warehouse_reject_main" >商家仓库收货审核拒绝</option>
+                    <option name="option" id="option8" value="mer_second_pass_plat_main" >商家收货后仲裁通过默认为平台责任</option>
+                    <option name="option" id="option9" value="mer_second_pass_mer_main" >商家收货后仲裁通过默认为商家责任</option>
+                    <option name="option" id="option10" value="mer_second_reject_main" >商家收货后仲裁拒绝为第三方责任</option>
+                    <option name="option" id="option11" value="plat_second_pass_main" >平台收货后二审通过</option>
+                    <option name="option" id="option12" value="plat_second_reject_main" >平台收货后二审拒绝</option>-->
+                </select>
+                </label>
+            </td>
+            <td>
+                <button id="aftersale_btn" class="btn btn-primary btn-small" >执行</button>
+                <div id="fountainTextG1" style="display: none">
+                    <div id="fountainTextG_1" class="fountainTextG">L</div>
+                    <div id="fountainTextG_2" class="fountainTextG">o</div>
+                    <div id="fountainTextG_3" class="fountainTextG">a</div>
+                    <div id="fountainTextG_4" class="fountainTextG">d</div>
+                    <div id="fountainTextG_5" class="fountainTextG">i</div>
+                    <div id="fountainTextG_6" class="fountainTextG">n</div>
+                    <div id="fountainTextG_7" class="fountainTextG">g</div>
+                </div>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 70px">
+                工具
+            </th>
+            <th style="width: 210px">
+                活动id
+            </th>
+            <th style="width: 80px;">
+                商品id
+            </th>
+            <th style="width: 200px;">
+                变更库存数
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                库存修改
+            </td>
+            <td>
+                <input type="text" id="liveId" placeholder="活动liveId（必填）" name="liveId" value="{{ liveId }}">
+            </td>
+            <td>
+                <input type="text" id="skuId" placeholder="商品skuId（必填）" name="skuId"  value="{{ skuId }}">
+            </td>
+            <td>
+                <input type="text"  placeholder="库存数量（>=0的整数）" id="amount" name="amount" class="singletext" value="{{ amount }}">
+            </td>
+            <td>
+                <button id="inventory_btn" class="btn btn-primary btn-small">执行</button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 70px">
+                工具
+            </th>
+            <th style="width: 210px">
+                活动id
+            </th>
+            <th style="width: 80px;">
+                上下架
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                活动上下架
+            </td>
+            <td>
+                <input type="text" id="liveId" placeholder="活动liveId（必填）" name="liveId" value="{{ liveId }}">
+            </td>
+            <td>
+                <label>
+                <select id="select-display">
+                    <option name="option" id="isDisplay" value="1" >上架</option>
+                    <option name="option" id="noDisplay" value="0" >下架</option>
+                </select>
+                </label>
+            </td>
+            <td>
+                <button id="display_btn" class="btn btn-primary btn-small">执行</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    {% import 'pages.html' as page %}
+    {{ page.check_page(args, url_list) }}
+<script>
+
+   $("#inventory_btn").click(function () {
+       if ($(this).parent().parent().find("input").map(function () {
+           if ($(this).val() === ''){
+                        return $(this).val();
+                    }
+       }).get().length > 0){
+           Notiflix.Report.Init();
+           let warning_message = "必填项不可为空！";
+           Notiflix.Report.Warning('【Warning】', warning_message, '确认');
+
+       }else {
+           let message = '';
+           let code = 0;
+           var nowDate = Date.parse(new Date());
+           var nowTime = nowDate.toString().substring(0, 10);
+           let json_info = {
+                            "liveId":$(this).parent().parent().find("#liveId").val(),
+                            "spuId":"0",
+                            "skuId":$(this).parent().parent().find("#skuId").val(),
+                            "spuSock":"",
+                            "skuInitStock":1000,
+                            "skuAllowStock":1000,
+                            "skuCurrentStock":parseInt($("#amount").val()),
+                            "skuWarningStock":10,
+                            "skuLockStock":0,
+                            "startTime":parseInt(nowTime),
+                            "endTime":1576124460,
+                            "modifyTime":parseInt(nowTime)
+                        };
+           $.ajax({
+                        url: "/modifyInventory",
+                        type: "POST",
+                        dataType: "json",
+                        contentType:"json/application",
+                        data: JSON.stringify(json_info),
+                        success: function(data){
+                            Notiflix.Report.Init();
+                            message = data.message;
+                            code = data.code;
+                            //$('#fountainTextG').css({"display": "none"});
+                            if (code === 0){
+                                Notiflix.Report.Success( 'Success', message, '确认' );
+                            }else{
+                                Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                            }
+                        }
+                    })
+       }
+
+   })
+
+</script>
+<script>
+   $(function() {
+              $('#select-display').selectric();
+            });
+
+   $("#display_btn").click(function () {
+       let message = '';
+       let code = 0;
+       let is_display = 0;
+       if ($(this).parent().parent().find('span[class="label"]').text() === '上架'){
+           is_display = 1;
+       }
+       console.log(is_display);
+       let json_info = {
+                        "id": $(this).parent().parent().find("#liveId").val(),
+                        "display": is_display
+                    };
+       $.ajax({
+                        url: "/updateDisplay",
+                        type: "POST",
+                        dataType: "json",
+                        contentType:"json/application",
+                        data: JSON.stringify(json_info),
+                        success: function(data){
+                            Notiflix.Report.Init();
+                            message = data.message;
+                            code = data.code;
+                            //$('#fountainTextG').css({"display": "none"});
+                            if (code === 0){
+                                Notiflix.Report.Success( 'Success', message, '确认' );
+                            }else{
+                                Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                            }
+                        }
+                    })
+   })
+
+</script>
+{% endblock %}
+

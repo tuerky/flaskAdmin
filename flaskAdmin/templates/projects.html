@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block div %}
+    <script src="//at.alicdn.com/t/font_1456738_7l5crn1i27y.js" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename ="util.js") }}"></script>
+    <h1>
+        通用工具
+    </h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th style="width: 30%">
+                    工具
+                </th>
+                <th style="width: 40%">
+                    行号
+                </th>
+                <th>
+                    操作
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    ee
+                </td>
+                <td>
+                    <label for="orderLineId">
+                        <input type="text" class="text" placeholder="行号（必填）" name="orderLineId" id="orderLineId" value="{{ orderLineId }}">
+                    </label>
+                </td>
+                <td>
+                    <button id="refund_btn" class="btn btn-primary btn-small" >执行</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h2>Excel转Xmind工具</h2>
+
+      <svg class="icon-ic_uploading_excel" aria-hidden="true" style="height: 70px;width: 70px;text-align: center">
+          <use xlink:href="#icon-ic_uploading_excel"></use>
+      </svg>
+        <p style="font-size: small; color: #111"> 点击图标上传转化</p>
+      <input type="file" id="file_name" style="display: none">
+
+    <script>
+    $(".icon-ic_uploading_excel").click(function () {
+        $("#file_name").click();
+    })
+    </script>
+
+    <script>
+    $('#file_name').on("change",function () {
+        let file_name = $('#file_name')[0].files[0].name;
+        let file = $('#file_name')[0].files[0];
+        //console.log(file);
+        let formData = new FormData();
+        formData.append('file_name', now + file_name);
+        formData.append('file', file);
+        let message = '';
+        let code = 0;
+        $.ajax({
+            url: "/upload",
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType:"json",
+            success: function(data){
+                Notiflix.Report.Init();
+                code = data.code;
+                message = data.message;
+                if (code === 200){
+                    Notiflix.Report.Success( '上传成功', message, '确认' );
+                    downLoadFile(formData.get('file_name'));
+
+                }else{
+                    Notiflix.Report.Failure( '上传失败', message, '确认' );
+
+                }
+            }
+        })
+    })
+
+
+    </script>
+    <script>
+    function downLoadFile(param) {
+        let a = document.createElement('a');
+        let url = "/download?file=" + param;
+        let filename = 'data.xmind';
+        a.href = url;
+        a.download = filename;
+        a.click();
+    }
+
+    </script>
+
+
+{% endblock %}

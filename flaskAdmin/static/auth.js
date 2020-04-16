@@ -15,6 +15,9 @@ var Auth = {
 		lowin_register: document.querySelector('.lowin-register'),
 		lowin_footer: document.querySelector('.lowin-footer'),
 		box: document.getElementsByClassName('lowin-box'),
+		//lowin_group_fork: document.querySelector('.lowin-group-fork'),
+        //form: document.getElementById("form-group"),
+		//lowin_error: document.querySelector('.login-error'),
 		option: {}
 	},
 	register(e) {
@@ -24,6 +27,9 @@ var Auth = {
 		}, 500);
 		Auth.vars.lowin_register.style.display = 'block';
 		Auth.vars.lowin_register.className += ' lowin-animated-flip';
+		/*setTimeout( () =>{
+			Auth.vars.lowin_error.style.display = 'none';
+		}, 2000);*/
 
 		Auth.setHeight(Auth.vars.lowin_register.offsetHeight + Auth.vars.lowin_footer.offsetHeight);
 
@@ -35,6 +41,7 @@ var Auth = {
 		Auth.vars.lowin_login.style.display = 'block';
 		Auth.vars.lowin_login.classList.remove('lowin-animated');
 		Auth.vars.lowin_login.className += ' lowin-animatedback';
+		//Auth.vars.lowin_error.style.display = 'block';
 		setTimeout(() => {
 			Auth.vars.lowin_register.style.display = 'none';
 		}, 500);
@@ -44,6 +51,10 @@ var Auth = {
 			Auth.vars.lowin_login.classList.remove('lowin-animatedback');
 		},1000);
 
+		/*setTimeout( () =>{
+			Auth.vars.lowin_error.style.display = 'none';
+		}, 500);*/
+
 		Auth.setHeight(Auth.vars.lowin_login.offsetHeight + Auth.vars.lowin_footer.offsetHeight);
 
 		e.preventDefault();
@@ -51,6 +62,10 @@ var Auth = {
 	forgot(e) {
 		Auth.vars.password_group.classList += ' lowin-animated';
 		Auth.vars.login_back_link.style.display = 'block';
+		//Auth.vars.form.style.visibility = 'hidden';
+		//Auth.vars.lowin_group_fork.style.visibility = 'visible';
+
+		//Auth.vars.lowin_error.style.display = 'none';
 
 		setTimeout(() => {
 			Auth.vars.login_back_link.style.opacity = 1;
@@ -61,7 +76,7 @@ var Auth = {
 		Auth.vars.login_btn.innerText = '忘记密码';
 
 		Auth.setHeight(Auth.vars.lowin_wrapper_height - Auth.vars.password_group_height);
-		Auth.vars.lowin_login.querySelector('form').setAttribute('action', Auth.vars.option.forgot_url);
+		//Auth.vars.lowin_login.querySelector('form').setAttribute('action', Auth.vars.option.forgot_url);
 
 		e.preventDefault();
 	},
@@ -69,6 +84,7 @@ var Auth = {
 		Auth.vars.password_group.classList.remove('lowin-animated');
 		Auth.vars.password_group.classList += ' lowin-animated-back';
 		Auth.vars.password_group.style.display = 'block';
+		//Auth.vars.lowin_error.style.display = 'none';
 
 		setTimeout(() => {
 			Auth.vars.login_back_link.style.opacity = 0;
@@ -82,7 +98,7 @@ var Auth = {
 		}, 1000);
 
 		Auth.vars.login_btn.innerText = '点击登录';
-		Auth.vars.lowin_login.querySelector('form').setAttribute('action', Auth.vars.option.login_url);
+		//Auth.vars.lowin_login.querySelector('form').setAttribute('action', Auth.vars.option.login_url);
 
 		Auth.setHeight(Auth.vars.lowin_wrapper_height);
 		
@@ -105,7 +121,7 @@ var Auth = {
 		Auth.vars.lowin_wrapper_height = Auth.vars.lowin_wrapper.offsetHeight;
 
 		Auth.vars.option = option;
-		Auth.vars.lowin_login.querySelector('form').setAttribute('action', option.login_url);
+		//Auth.vars.lowin_login.querySelector('form').setAttribute('action', option.login_url);
 
 		var len = Auth.vars.box.length - 1;
 

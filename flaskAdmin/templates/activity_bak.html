@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block div %}
+<script src="//at.alicdn.com/t/font_1456738_evb8si1hagc.js" type="text/javascript"></script>
+<script src="//at.alicdn.com/t/font_1456738_d94fxm23bna.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename ='iconfont.css')}}">
+<main class="sortable">
+<div class="container">
+  <div class="wrapper">
+    <ul class="sortable__nav nav">
+      <li> <a data-sjslink="all" class="nav__link"> 全部 </a> </li>
+      <li> <a data-sjslink="flatty" class="nav__link"> 扁平的 </a> </li>
+      <li> <a data-sjslink="funny" class="nav__link"> 有趣的 </a> </li>
+    </ul>
+    <div id="sortable" class="sjs-default" style="overflow: hidden">
+
+
+      <div data-sjsel="flatty" >
+        <div class="card"> <img class="card__picture" src="{{ item['pic_url']}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">
+                {{ item['title'] }}
+            </h2>
+            <p class="card__text" id="card__show" style="display: block">
+                {%  set lyric_list = item['lyric'].split('\n') %}
+                {% for lyric in lyric_list %}
+                    {% if lyric != '' and loop.index < 15 %}
+                      {{ lyric }} <br>
+                    {% elif lyric != '' and loop.index == 15 %}
+                      ......
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <p class="card__text" id="card__hidden" style="display: none">
+                {% for lyric in lyric_list %}
+                    {% if lyric != '' %}
+                       {{ lyric }} <br>
+                    {% endif %}
+                {% endfor %}
+            </p>
+            {% if lyric_list | length > 15 %}
+              <span class="span_xiala" style="font-size: xx-small; color: #08c; float: right ;" >
+                  <svg class="icon-xiala" aria-hidden="true">
+                      <use xlink:href="#icon-xiala"></use>
+                  </svg>
+                  更多
+              </span>
+            {% endif %}
+              <span class="span_shangla" style="font-size: xx-small; color: #08c; float: right ; display: none" >
+                  收起
+                  <svg class="icon-shangla1" aria-hidden="true">
+                      <use xlink:href="#icon-shangla1"></use>
+                  </svg>
+              </span>
+            </div>
+        </div>
+      </div>
+
+
+      {% endfor %}
+
+      <!--<div data-sjsel="flatty">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-1.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 2</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum vitae necessitatibus, dolorem similique vero explicabo... </p>
+            </div>
+        </div>
+      </div>
+      <div data-sjsel="flatty">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-2.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 2</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum vitae necessitatibus, dolorem similique vero explicabo... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="funny">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-3.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 3</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, placeat voluptate, fuga tenetur eos ducimus animi porro... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="flatty">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-4.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 4</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit doloremque quisquam, obcaecati unde nam est quos... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="flatty">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-5.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 5</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse corporis hic minima nisi reprehenderit... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="funny">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-6.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 6</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel voluptatibus, id, deserunt inventore... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="flatty">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-7.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 7</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum enim beatae vero culpa, fuga, magni sunt dolores nam... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="flatty">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-8.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 8</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae numquam, blanditiis necessitatibus... </p>
+          </div>
+        </div>
+      </div>
+      <div data-sjsel="funny">
+        <div class="card"> <img class="card__picture" src="{{ url_for('static', filename ='item-9.png')}}" alt="">
+          <div class="card-infos">
+            <h2 class="card__title">Example 9</h2>
+            <p class="card__text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur adipisci voluptatum laborum officiis... </p>
+          </div>
+        </div>
+      </div>-->
+
+    </div>
+  </div>
+</div>
+</main>
+{% import 'pages.html' as page %}
+{{ page.check_page(args, url_list) }}
+    <script>
+        $(document).ready(function () {
+            Notiflix.Loading.Init({
+              clickToClose:false
+            });
+            Notiflix.Loading.Hourglass('数据加载中...请稍等');
+
+        });
+        window.onload = function(){
+                Notiflix.Loading.Remove();
+        }
+    </script>
+    <script type="text/javascript">
+        document.querySelector('#sortable').sortablejs()
+    </script>
+    <script>
+        $(".span_xiala").click(function () {
+            $(this).prev().css({"display": "block"});
+            $(this).prev().prev().css({"display": "none"});
+            $(this).css({"display": "none"});
+            $(this).next().css({"display": "block"});
+
+        });
+        $(".span_shangla").click(function () {
+            $(this).css({"display": "none"});
+            $(this).prev().css({"display": "block"});
+            $(this).prev().prev().css({"display": "none"});
+            $(this).prev().prev().prev().css({"display": "block"});
+
+        })
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% block div %}
+    <h1>
+		配置banner工具
+    </h1>
+    <div class="div-banner">
+        {% if env == 'test' %}
+        <input id="prod" type="checkbox" style="vertical-align: initial" class="env"><em style="font-size: xx-small; color: #999">生产</em>
+        <input id="test" type="checkbox" style="vertical-align: initial" class="env" checked="checked"><em style="font-size: xx-small; color: #999">测试</em>
+        {% else %}
+        <input id="prod" type="checkbox" style="vertical-align: initial" class="env" checked="checked"><em style="font-size: xx-small; color: #999">生产</em>
+        <input id="test" type="checkbox" style="vertical-align: initial" class="env"><em style="font-size: xx-small; color: #999">测试</em>
+        {% endif %}
+    </div>
+    <table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th >
+                activityTagNo
+            </th>
+            <th >
+                背景图片
+            </th>
+            <th >
+                type
+            </th>
+            <th style="width: 200px">
+                跳转url路径
+            </th>
+            <th >
+                conferenceId
+            </th>
+            <th style="width: 50px;">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for item in banner_list %}
+            <tr>
+                <td >
+                    <input type="text" id="tagId" style="max-width: none;width: 70%" placeholder="（必填）" name="activityTagNo" value="{{ item['activityTagNo'] }}">
+                </td>
+                <td>
+                    <img id="bannerId" class="banner" style="max-width: none;width: 200px" src="{{ item['bannerUrl'] }}" >
+                </td>
+                <td >
+                    <input type="text" id="typeId" style="max-width: none;width: 70%" placeholder="type（必填）" name="type" value="{{ item['type'] }}">
+                </td>
+                <td >
+                    <input type="text" id="jumpUrlId" style="max-width: none;width: 70%" placeholder="jumpUrl（必填）" name="jumpUrl" value="{{ item['jumpUrl'] }}">
+                </td>
+                <td >
+                    <input type="text" id="conferenceId" style="max-width: none;width: 70%" placeholder="（必填）" name="conferenceId" value="{{ item['conferenceId'] }}">
+                </td>
+                <td>
+                    <a style="max-width: none;width: 70%">
+                        <i id="remove-tag" class="icon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+    </tbody>
+    </table>
+    <div style="display: flex;justify-content: space-between;">
+        <span class="meta">新增 <em>banner </em><i class="icon-plus"></i></span>
+        <button id="bannerPush" type="submit" class="btn btn-primary" style="float: right; font-size: x-small">更新banner</button>
+    </div>
+
+
+    <script>
+    $(".icon-plus").click(function(){
+        let plus_content = "<tr>\n" +
+            "                <td >\n" +
+            "                    <input type=\"text\" id=\"tagId\" style=\"max-width: none;width: 70%\" placeholder=\"（必填）\" name=\"activityTagNo\">\n" +
+            "                </td>\n" +
+            "                <td>\n" +
+            "                    <img id=\"bannerId\" class=\"banner\" style=\"max-width: none;width: 200px\" src=\"http://bpic.588ku.com/back_pic/17/05/22/876b16cf01eafdedec142c08e6bc5595.jpg\" >\n" +
+            "                </td>\n" +
+            "                <td >\n" +
+            "                    <input type=\"text\" id=\"typeId\" style=\"max-width: none;width: 70%\" placeholder=\"type（必填）\" name=\"type\" >\n" +
+            "                </td>\n" +
+            "                <td >\n" +
+            "                    <input type=\"text\" id=\"jumpUrlId\" style=\"max-width: none;width: 70%\" placeholder=\"jumpUrl（必填）\" name=\"jumpUrl\" >\n" +
+            "                </td>\n" +
+            "                <td >\n" +
+            "                    <input type=\"text\" id=\"conferenceId\" style=\"max-width: none;width: 70%\" placeholder=\"（必填）\" name=\"conferenceId\" >\n" +
+            "                </td>\n" +
+            "                <td>\n" +
+            "                    <a style=\"max-width: none;width: 70%\">\n" +
+            "                        <i id=\"remove-tag\" class=\"icon-remove\"></i>\n" +
+            "                    </a>\n" +
+            "                </td>\n" +
+            "</tr>";
+        $(this).parent().parent().prev().find("tbody").append(plus_content);
+        // 添加banner引用方法
+        changePic();
+
+        // 引用remove方法
+        $(".icon-remove").click(function () {
+        $(this).parent().parent().parent().remove();
+    });
+    })
+
+    </script>
+    <script>
+    // 图片点击变更方法
+    function changePic(){
+    $(".banner").click(function () {
+        let div_element = $("<div></div>");
+        let img_element = "<input " +
+            "type=\"text\" id=\"picUrlId\" style=\"max-width: none;width: 60%\" " +
+            "placeholder=\"（必填）\" name=\"picUrl\" value=\"" + $(this).attr('src') + '\"> <button id="urlUpdate" ' +
+            'type="submit" class="pic btn btn-primary" style="float: right; font-size: x-small">更新</button>';
+        div_element.append(img_element);
+        // 判断元素是否存在
+        if ($(this).next().length > 0){
+            $(this).next().css({"display": "block"});
+        }else {
+            $(this).parent().append(div_element);
+        }
+        $(this).css({"display": "none"});
+        updatePic();
+    })
+    }
+    changePic();
+    </script>
+
+    <script>
+    // 图片更新方法
+    function updatePic() {
+    $(".btn-primary").click(function () {
+        $(this).parent().css({"display": "none"});
+        $(this).parent().prev().attr('src', $(this).prev().val());
+        $(this).parent().prev().css({"display": "block"});
+    })
+    }
+    </script>
+
+    <script>
+    // 通用js方法应使用类名点击
+    $(".icon-remove").click(function () {
+        $(this).parent().parent().parent().remove();
+    });
+    </script>
+
+    <script>
+    // env 路由跳转
+    $(".div-banner").find("input").click(function () {
+        window.location.href = "/task_banner/" + $(this).attr('id');
+    })
+
+    </script>
+    <script>
+    // 必填项确认
+    function confirmNull() {
+        return $(".div-banner").next().find('input').map(function () {
+                    if ($(this).val() === ''){
+                        return $(this).val();
+                    }
+                }).get();
+    }
+    // 获取调用url环境
+    function getEnv(){
+        if ($('#prod').is(':checked')){
+            //console.log($(this).val());
+            return 'prod';
+        }else {
+            return 'test';
+        }
+    }
+    Notiflix.Report.Init();
+    $("#bannerPush").click(function () {
+        if (confirmNull().length > 0){
+            let warning_message = "必填项不可为空！";
+            Notiflix.Report.Warning('【Warning】', warning_message, '确认');
+
+        }else{
+            Notiflix.Confirm.Init({});
+            Notiflix.Confirm.Show(
+                '【CONFIRM】',
+                'Are You Sure ?',
+                '确认',
+                '取消',
+                function(){
+                    let message = '';
+                    let code = 0;
+                    let bannerList = [];
+                    let tagValue = '';
+                    let bannerUrl = '';
+                    let typeId = '';
+                    let jumpUrl = '';
+                    let conferenceId = '';
+                    var ele = $(".div-banner").next().find("tr");
+                    // 排除index 0 的影响
+                    ele.not(ele[0]).each(function () {
+                        tagValue = $(this).find("#tagId").val();
+                        bannerUrl = $(this).find("#bannerId").attr('src');
+                        typeId = $(this).find("#typeId").val();
+                        jumpUrl = $(this).find("#jumpUrlId").val();
+                        conferenceId = $(this).find("#conferenceId").val();
+                        bannerList.push({
+                            "activityTagNo": parseInt(tagValue),
+                            "bannerUrl": bannerUrl,
+                            "type": parseInt(typeId),
+                            "jumpUrl": jumpUrl,
+                            "conferenceId": parseInt(conferenceId)
+                        })
+
+                    });
+                    console.log(bannerList);
+                    $.ajax({
+                        url: "/setBanner?env=" + getEnv(),
+                        type: "POST",
+                        dataType: "json",
+                        contentType:"json/application",
+                        data: JSON.stringify(bannerList),
+                        success: function(data){
+                            Notiflix.Report.Init();
+                            message = data.message;
+                            code = data.code;
+                            //$('#fountainTextG').css({"display": "none"});
+                            if (code === 0){
+                                Notiflix.Report.Success( 'Success', message, '确认' );
+                            }else{
+                                Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                            }
+                        }
+                    })
+                }
+                );
+        }
+    });
+    </script>
+
+       {% import 'pages.html' as page %}
+       {{ page.check_page(args, url_list) }}
+
+{% endblock %}

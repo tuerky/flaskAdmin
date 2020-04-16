@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en"><!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>测试平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="{{ url_for('static', filename ='bootstrap.min.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename ='bootstrap-responsive.min.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename ='site.css')}}" rel="stylesheet">
+        <link href="{{ url_for('static', filename ='public.css')}}" rel="stylesheet">
+        <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <link href="{{ url_for('static', filename ='selectric.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename ='main.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename ='sortable.min.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename ='sortable.js')}}"></script>
+        <!--<link href="https://cdn.jsdelivr.net/npm/busy-load/dist/app.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/busy-load/dist/app.min.js"></script>-->
+        <link rel="stylesheet" href="{{ url_for('static', filename ='notiflix-1.3.0.min.css')}}">
+        <script src="{{ url_for('static', filename ='notiflix-1.3.0.min.js')}}"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">质量测试平台</a>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="/index">主页</a>
+								</li>
+								<li>
+									<a href="/settings">设置</a>
+								</li>
+								<li>
+									<a href="/help">帮助</a>
+								</li>
+								<li class="dropdown">
+									<a href="help.html" class="dropdown-toggle" data-toggle="dropdown">Tours <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="/help">测试</a>
+										</li>
+										<li>
+											<a href="/help">测试</a>
+										</li>
+										<li>
+											<a href="/help">测试</a>
+										</li>
+										<li>
+											<a href="/help">测试</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li class="nav-header">
+											测试
+										</li>
+										<li>
+											<a href="/help">测试</a>
+										</li>
+										<li>
+											<a href="/help">测试</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<form class="navbar-search pull-left" action="">
+								<input type="text" class="search-query span2" placeholder="Search" />
+							</form>
+							<ul class="nav pull-right">
+								<li>
+									<a href="/profile">{{ userName }}</a>
+								</li>
+								<li>
+									<a href="/logout">退出登录</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span3">
+					<div class="well" style="padding: 8px 0;">
+						<ul class="nav nav-list" >
+							<li class="nav-header">
+								工具化
+							</li>
+							<li >
+								<a href="/index"><i class="icon-white icon-home"></i>主页</a>
+							</li>
+							<li>
+								<a href="/projects"><i class="icon-folder-open"></i>通用工具</a>
+							</li>
+							<li>
+								<a href="/tasks"><i class="icon-check"></i>配置工具</a>
+							</li>
+							<li>
+								<a href="/messages"><i class="icon-envelope"></i>测试</a>
+							</li>
+							<li>
+								<a href="/files"><i class="icon-file"></i>测试</a>
+							</li>
+							<li>
+								<a href="/activity"><i class="icon-list-alt"></i>流程工具</a>
+							</li>
+							<li class="nav-header">
+								个人中心
+							</li>
+							<li>
+								<a href="/profile"><i class="icon-user"></i> 用户</a>
+							</li>
+							<li>
+								<a href="/settings"><i class="icon-cog"></i> 测试</a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a href="help.html"><i class="icon-info-sign"></i> Help</a>
+							</li>
+							<li class="nav-header">
+								测试
+							</li>
+							<li>
+								<a href="/gallery"><i class="icon-picture"></i> 测试</a>
+							</li>
+							<li>
+								<a href="/blank"><i class="icon-stop"></i> 测试</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="span9">
+					{% block div %}{% endblock %}
+				</div>
+			</div>
+		</div>
+        <script src="{{ url_for('static', filename ='jquery.selectric.min.js')}}"></script>
+		<!--<script src="{{ url_for('static', filename ='jquery.min.js')}}"></script>-->
+		<!--<script src="{{ url_for('static', filename ='bootstrap.min.js')}}"></script>-->
+		<script src="{{ url_for('static', filename ='site.js')}}"></script>
+        <script>
+            function SetFunc(){
+                let href_index = '"/' + window.location.pathname.replace(/\//g,'') + '"'
+                //$(".active").removeClass('active');
+                //console.log(href_index);
+                $("a[href="+href_index+"]").parent().addClass('active');
+            }
+            SetFunc();
+        </script>
+        <script>
+            $(function () {
+                $('#imgChange').click(function () {
+                    $.ajax({
+                        url: "/verify_code",
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data){
+                            //console.log(data);
+                            $('input[name="cookie"]').val(data.cookie);
+                            $('#imgCode').attr('src', '../static/verif_code.jpeg?' + Math.random());
+
+                    }
+
+                })
+
+
+                })
+
+            })
+        </script>
+        <script>
+            Notiflix.Loading.Init({
+              clickToClose:true
+            });
+            $(function() {
+            $("#delivery_btn").click(function () {
+
+                if (!$('input[name="orderId"]').val()||!$('input[name="randCode"]').val()){
+                    $('input[name="orderId"]').attr('placeholder',"二级单号不可为空");
+                    $('input[name="randCode"]').attr('placeholder',"验证码不可为空");
+
+                }else {
+                    //$("#delivery_btn").hide();
+                    //$('#fountainTextG').css({"display": "block"});
+                    //$.busyLoadFull("show", {text: "LOADING ...", textPosition: "top", background: "rgba(13, 33, 31, 0.67)"});
+                    Notiflix.Loading.Hourglass("发货中...请稍等");
+                    let code = 0;
+                    let message = '';
+                    $.ajax({
+                        url: "/delivery_order",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "orderId": $('input[name="orderId"]').val(),
+                            "cookie": $('input[name="cookie"]').val(),
+                            "randCode": $('input[name="randCode"]').val()
+                        },
+                        success: function(data){
+                            Notiflix.Loading.Remove();
+                            Notiflix.Report.Init();
+                            //console.log(data);
+                            code = data.code;
+                            message = data.message;
+                            //$('#fountainTextG').css({"display": "none"});
+                            //$.busyLoadFull("hide");
+                            if (code === 200){
+                                Notiflix.Report.Success( 'Success', message, '确认' );
+                            }else{
+                                Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                            }
+                            //$("#delivery_btn").text(message).show();
+                    }
+                })
+
+                }
+
+            })
+        })
+        </script>
+        <script>
+            //设置单选事件
+            function setOnePick(ck){
+            $("." + ck).click(function () {
+                $("." + ck).find("input[type='checkbox']").prop("checked", false).removeAttr("checked");
+                let ele = $(this).find("input[type='checkbox']");
+                ele.prop("checked", true).attr("checked","checked");
+                setOption();
+            })}
+            setOnePick("service_checkbox");
+            setOnePick("plat_checkbox");
+
+        </script>
+        <script>
+            //配置工具env设置单选
+            $(function () {
+                $('input[class="env"]').click(function () {
+                    $('input[class="env"]').prop("checked", false).removeAttr("checked");
+                    $(this).prop("checked", true).attr("checked","checked");
+                })
+
+            })
+        </script>
+        <script>
+            $(function() {
+              $('#select').selectric();
+            });
+
+           function setOption() {
+                $('#select').empty();
+                if ($('#platformCheckboxList1').is(':checked') && $('#serviceCheckboxList1').is(':checked')){
+
+                    let value1 = '平台漏发退款一审通过';
+                    let value2 = '平台漏发退款一审拒绝';
+
+                    $('#select').append('<option value="plat_first_pass_main">' + (value1 ? value1 : 'Empty') + '</option>')
+                    .append('<option value="plat_first_reject_main">' + (value2 ? value2 : 'Empty') + '</option>');
+                    $('#select').selectric('refresh');
+
+                } else if($('#platformCheckboxList2').is(':checked') && $('#serviceCheckboxList1').is(':checked')){
+
+                    let value1 = '商家漏发退款一审通过';
+                    let value2 = '商家漏发退款一审拒绝';
+
+                    $('#select').append('<option>' + (value1 ? value1 : 'Empty') + '</option>')
+                    .append('<option>' + (value2 ? value2 : 'Empty') + '</option>');
+                    $('#select').selectric('refresh');
+
+                } else if($('#platformCheckboxList1').is(':checked') && $('#serviceCheckboxList2').is(':checked')) {
+                    let value1 = '退货退款一审通过等待快件退货';
+                    let value2 = '退货退款一审拒绝';
+                    let value3 = '平台收货后二审通过';
+                    let value4 = '平台收货后二审拒绝';
+                    $('#select').append('<option>' + (value1 ? value1 : 'Empty') + '</option>')
+                    .append('<option>' + (value2 ? value2 : 'Empty') + '</option>')
+                    .append('<option>' + (value3 ? value3 : 'Empty') + '</option>')
+                    .append('<option>' + (value4 ? value4 : 'Empty') + '</option>');
+                    $('#select').selectric('refresh');
+
+                } else{
+                    let value1 = '退货退款一审通过等待快件退货';
+                    let value2 = '退货退款一审拒绝';
+                    let value3 = '商家仓库收货审核通过';
+                    let value4 = '商家仓库收货审核拒绝';
+                    let value5 = '商家收货后仲裁通过默认为平台责任';
+                    let value6 = '商家收货后仲裁通过默认为商家责任';
+                    let value7 = '商家收货后仲裁拒绝为第三方责任';
+                    $('#select').append('<option>' + (value1 ? value1 : 'Empty') + '</option>')
+                    .append('<option>' + (value2 ? value2 : 'Empty') + '</option>')
+                    .append('<option>' + (value3 ? value3 : 'Empty') + '</option>')
+                    .append('<option>' + (value4 ? value4 : 'Empty') + '</option>')
+                    .append('<option>' + (value5 ? value5 : 'Empty') + '</option>')
+                    .append('<option>' + (value6 ? value6 : 'Empty') + '</option>')
+                    .append('<option>' + (value7 ? value7 : 'Empty') + '</option>');
+                    $('#select').selectric('refresh');
+                }
+
+            }
+        </script>
+        <script>
+            // 配置工具 全选事件
+            $(function(){
+                $('#chosen').click(function (){
+                    if (!$('#chosen').is(':checked')) {
+                        $('.zebra-list').find('input[type="checkbox"][class!="env"]').prop("checked", false);
+                    }else if ($('#chosen').is(':checked')) {
+                        $('.zebra-list').find('input[type="checkbox"][class!="env"]').prop("checked", true);
+                    }
+                })
+
+            });
+
+
+        </script>
+
+        <script>
+            $(function () {
+                $('#aftersale_btn').click(function () {
+
+                        if (!$('#serviceId').val()){
+                            $('#serviceId').attr('placeholder',"服务单号不可为空");
+
+                        }else {
+                            //$("#aftersale_btn").hide();
+                            //$.busyLoadFull("show", {text: "LOADING ...", textPosition: "top", background: "rgba(13, 33, 31, 0.67)"});
+
+                            let message = '';
+                            let code = 0;
+                            $.ajax({
+                            url: "/afterSale",
+                            type: "POST",
+                            dataType: "json",
+                            data: {
+                                "serviceId": $('#serviceId').val(),
+                                "executeMethod": $(this).parent().parent().find('span[class="label"]').text()
+                            },
+                            success: function(data){
+                                Notiflix.Report.Init();
+                                message = data.message;
+                                code = data.code;
+                                if (code === 200){
+                                    Notiflix.Report.Success( 'Success', message, '确认' );
+                                }else{
+                                    Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                                }
+
+                            }
+
+                        })
+
+                        }
+
+                })
+
+            })
+
+        </script>
+        <script>
+            Notiflix.Report.Init();
+            function getValue(){
+                return $('.zebra-list').find('input[type="text"]').map(function () {
+                    if ($(this).val() !== ''){
+                        return $(this).val();
+                    }
+                }).get();
+            }
+
+
+            // 获取调用url环境
+            function getEnv(){
+                if ($('#prod').is(':checked')){
+                    //console.log($(this).val());
+                    return 'prod';
+                }else {
+                    return 'test';
+                }
+            }
+            // 配置中心点击事件
+            $(function () {
+                $('#tagPush').click(function () {
+
+                    if($('.zebra-list').find('input[type="checkbox"][class!="env"]').is(":checked") &&
+                        getValue().length >= 20 ){
+                        let message = '';
+                        let code = 0;
+                        let env = getEnv();
+                        let tagList = [];
+                        $('.zebra-list').find('input[type="checkbox"][class!="env"][id!="chosen"]').each(function () {
+                            tagList.push({"beforeTagName": $(this).next().text(), "afterTagName": $(this).next().next().val()});
+                            //console.log($(this).next().text());
+                            //console.log($(this).next().next().val());
+                        });
+
+                        $.ajax({
+                            url: "/setTag?env=" + env,
+                            type: "POST",
+                            dataType: "json",
+                            contentType:"json/application",
+                            data: JSON.stringify(tagList),
+                            success: function(data){
+                                //console.log(data);
+                                message = data.message;
+                                code = data.code;
+                                //$('#fountainTextG').css({"display": "none"});
+                                if (code === 0){
+                                    Notiflix.Report.Success( 'Success', message, '确认' );
+                                }else{
+                                    Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                                }
+
+                                //$("#aftersale_btn").text(message).show();
+                            }
+
+                        })
+
+
+                    }
+                    else if (getValue().length < 20 &&
+                    $('.zebra-list').find('input[type="checkbox"][class!="env"]').is(":checked")) {
+                        //console.log(getValue());
+                        let warning_message = "展示分类名不可为空！";
+                        Notiflix.Report.Warning('【Warning】', warning_message, '确认');
+                    }
+                    else {
+                        let warning_message = "分类请全选！";
+                        //console.log(valList);
+                        Notiflix.Report.Warning('【Warning】', warning_message, '确认');
+                    }
+                })
+
+            })
+        </script>
+        <script>
+            $(function () {
+                $('#refund_btn').click(function () {
+
+                        if (!$('#orderLineId').val()){
+                            $('#orderLineId').attr('placeholder',"订单行号不可为空");
+
+                        }else {
+                            //$("#aftersale_btn").hide();
+                            //$.busyLoadFull("show", {text: "LOADING ...", textPosition: "top", background: "rgba(13, 33, 31, 0.67)"});
+
+                            let message = '';
+                            let code = 0;
+                            $.ajax({
+                            url: "/refund",
+                            type: "POST",
+                            dataType: "json",
+                            data: {
+                                "orderLineId": $('#orderLineId').val()
+                            },
+                            success: function(data){
+                                Notiflix.Report.Init();
+                                message = data.message;
+                                code = data.code;
+                                if (code === 0){
+                                    Notiflix.Report.Success( 'Success', message, '确认' );
+                                }else{
+                                    Notiflix.Report.Failure( 'Failure', message, '确认' );
+
+                                }
+
+                            }
+
+                        })
+
+                        }
+
+                })
+
+            })
+        </script>
+	</body>
+</html>
