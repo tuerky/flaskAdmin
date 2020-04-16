@@ -120,23 +120,23 @@ class MySnow:
         return id
 
 
-def encode_scale(shop_id):
+def encode_scale(xid):
     """
-    :type shop_id: int
+    :type xid: int
     """
     code_str = 'xxxxxxx'
-    # 默认62位
+    
     init_str = ''
 
-    if shop_id is None: return ""
+    if xid is None: return ""
     else:
         while True:
-            reminder = shop_id % 62
+            reminder = xid % 62
             init_str += code_str[int(reminder)]
-            shop_id = shop_id / 62
+            xid = xid / 62
             if shop_id <= 60:
                 break
-        init_str += code_str[int(shop_id)]
+        init_str += code_str[int(xid)]
         # 反转字符串
         res_str = init_str[::-1]
     return res_str
