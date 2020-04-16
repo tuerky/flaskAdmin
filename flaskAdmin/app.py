@@ -448,10 +448,10 @@ def trash_member_info():
     json_msg = [
         {
             "code": 200,
-            "message": "清除会员缓存成功"
+            "message": "xx成功"
         }, {
             "code": 301,
-            "message": "清除会员缓存失败"
+            "message": "xx失败"
         }
 
     ]
@@ -470,10 +470,10 @@ def create_virtual_distributor():
     json_msg = [
         {
             "code": 200,
-            "message": "新增虚拟代理成功"
+            "message": "xx成功"
         }, {
             "code": 301,
-            "message": "新增虚拟代理失败"
+            "message": "xx失败"
         }
 
     ]
